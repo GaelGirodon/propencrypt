@@ -1,0 +1,5 @@
+users:
+- name: john
+  pass: bd852f
+- name: paul
+  pass: 2b13a9

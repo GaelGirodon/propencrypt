@@ -1,0 +1,5 @@
+users:
+- name: john
+  pass: ENC(itnU8kJjEPCW8L4Zi9vph15l9uPzDkDCpOw72zPJy2in7g==)
+- name: paul
+  pass: ENC(/x0MsCIi4lMiAvUS1zXDo0ogUT0nokmRHrBkzHC5sZLO2Q==)
