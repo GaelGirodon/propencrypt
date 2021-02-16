@@ -12,6 +12,3 @@
 # IDE
 .idea/
 *.iml
-
-# Project
-dist/

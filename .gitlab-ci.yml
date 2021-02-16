@@ -1,0 +1,47 @@
+#
+# .gitlab-ci.yml
+#
+
+image: golang
+
+stages:
+  - test
+  - build
+  - package
+
+test:
+  stage: test
+  script:
+    - go test -v -coverpkg ./... ./...
+
+build:
+  stage: build
+  script:
+    - GOARCH=amd64 GOOS=linux   go build -ldflags="-s -w" -o "propencrypt"     "cmd/propencrypt.go"
+    - GOARCH=amd64 GOOS=windows go build -ldflags="-s -w" -o "propencrypt.exe" "cmd/propencrypt.go"
+  artifacts:
+    paths: [ "propencrypt", "propencrypt.exe" ]
+    expire_in: 1 week
+
+package-linux:
+  stage: package
+  script:
+    - archive=propencrypt_linux_amd64.tar.gz
+    - tar zcvf "${archive}" propencrypt
+    - sha256sum "${archive}" | cut -d' ' -f 1 > "${archive}.sha256"
+  artifacts:
+    paths: [ "propencrypt_linux_amd64.tar.gz*" ]
+    expire_in: 1 week
+
+package-windows:
+  stage: package
+  image: mcr.microsoft.com/powershell
+  script:
+    - pwsh -NoLogo -NoProfile -Command "
+      \$archive = 'propencrypt_windows_amd64.zip';
+      Compress-Archive 'propencrypt.exe' -DestinationPath \"\$archive\" -CompressionLevel 'Optimal';
+      \$hash = (Get-FileHash -Algorithm 'SHA256' \"\$archive\").Hash.ToLower();
+      Set-Content -Path \"\$archive.sha256\" -Value \"\$hash\`n\" -Encoding 'ascii' -NoNewline"
+  artifacts:
+    paths: [ "propencrypt_windows_amd64.zip*" ]
+    expire_in: 1 week
