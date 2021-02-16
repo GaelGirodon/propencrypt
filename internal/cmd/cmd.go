@@ -38,7 +38,7 @@ func NewCommand(name string, description string, usage string, examples []string
 		description: description,
 		usage:       usage,
 		examples:    examples,
-		flagSet:     flag.NewFlagSet("name", flag.ExitOnError),
+		flagSet:     flag.NewFlagSet("name", flag.ContinueOnError),
 	}
 	c.flagSet.SortFlags = false
 	c.helpFlag = c.flagSet.BoolP("help", "h", false, "Show the help message")

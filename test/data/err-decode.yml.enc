@@ -1,0 +1,3 @@
+users:
+- name: invalid
+  pass: ENC(Base64Nok)

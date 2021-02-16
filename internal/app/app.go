@@ -22,7 +22,7 @@ func Run() int {
 	commands["version"] = version.NewVersionCmd()
 
 	// Define root flags
-	flagSet := flag.NewFlagSet("root", flag.ExitOnError)
+	flagSet := flag.NewFlagSet("root", flag.ContinueOnError)
 	helpFlag := flagSet.BoolP("help", "h", false, "Show the help message")
 	versionFlag := flagSet.BoolP("version", "v", false, "Show the version number")
 
@@ -54,9 +54,6 @@ func Run() int {
 	// Parse the selected command
 	args := os.Args[2:]
 	if selectedCmd.FlagSet() != nil {
-		selectedCmd.FlagSet().Usage = func() {
-			_ = commands["help"].Run(selectedCmd.Name())
-		}
 		err := selectedCmd.FlagSet().Parse(args)
 		args = selectedCmd.FlagSet().Args()
 		if err != nil {

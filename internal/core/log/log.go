@@ -26,11 +26,11 @@ func Printf(format string, v ...interface{}) {
 
 // Warn prints a warning message on the log output.
 func Warn(format string, v ...interface{}) {
-	_, _ = fmt.Fprintf(Output, "Warn: "+format, v...)
+	_, _ = fmt.Fprintf(Output, "Warn: "+format+"\n", v...)
 }
 
 // Error prints an error message on the log output.
 func Error(format string, v ...interface{}) int {
-	_, _ = fmt.Fprintf(Output, "Error: "+format, v...)
+	_, _ = fmt.Fprintf(Output, "Error: "+format+"\n", v...)
 	return 1
 }
