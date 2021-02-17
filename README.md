@@ -1,13 +1,18 @@
 # Propencrypt
 
+[![release](https://img.shields.io/github/v/release/GaelGirodon/propencrypt?style=flat-square)](https://github.com/GaelGirodon/propencrypt/releases/latest)
+[![license](https://img.shields.io/github/license/GaelGirodon/propencrypt?color=blue&style=flat-square)](./LICENSE)
+[![build](https://img.shields.io/gitlab/pipeline/GaelGirodon/propencrypt/master?style=flat-square)](https://gitlab.com/GaelGirodon/propencrypt/-/pipelines/latest)
+[![coverage](https://img.shields.io/gitlab/coverage/GaelGirodon/propencrypt/master?style=flat-square)](https://gitlab.com/GaelGirodon/propencrypt/-/pipelines/latest)
+
 Encrypt and decrypt multiple properties, in multiple files, at once.
 
 ## About
 
-There are many solutions out there to manage file encryption:
+There are many solutions to manage file encryption:
 
 - **GPG** provides easy file encryption, but the output binary file is not
-  _Git-friendly_ (no diff, code review is more difficult, etc.).
+  _Git-friendly_ (no diff available, code review is more difficult, etc.).
 - **Ansible Vault** encrypts variables and files. With variable encryption,
   files are still easily legible (plaintext and encrypted variables can be mixed
   in the same file), but each string must be encrypted individually making it
@@ -33,13 +38,13 @@ following features:
 
 ## Install
 
-> `DOWNLOAD_URL`: <https://github.com/GaelGirodon/propencrypt/releases/latest/download>
+> `DOWNLOAD_URL` : <https://github.com/GaelGirodon/propencrypt/releases/latest/download>
 
 Download and extract `propencrypt`:
 
 ```shell
 # Linux
-curl -sL "$DOWNLOAD_URL/propencrypt_linux_amd64.tar.gz"  | tar xvz
+curl -sL "$DOWNLOAD_URL/propencrypt_linux_amd64.tar.gz" | tar xvz
 ```
 
 ```powershell

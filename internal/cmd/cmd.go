@@ -2,7 +2,7 @@ package cmd
 
 import flag "github.com/spf13/pflag"
 
-// Command is an application sub-command.
+// ICommand is an application sub-command.
 type ICommand interface {
 	// Name is the command name.
 	Name() string

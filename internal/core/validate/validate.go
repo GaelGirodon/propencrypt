@@ -46,9 +46,8 @@ func Ext(input *string) (string, error) {
 	}
 	if input == nil {
 		return "", nil
-	} else {
-		return *input, nil
 	}
+	return *input, nil
 }
 
 // Files validates a files list and expand globs. ext is the suffix

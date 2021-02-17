@@ -1,4 +1,4 @@
-// Provides symmetric authenticated encryption using 256-bit AES-GCM with a random nonce.
+// Package crypto provides symmetric authenticated encryption using 256-bit AES-GCM with a random nonce.
 // See https://github.com/gtank/cryptopasta
 package crypto
 
