@@ -2,20 +2,23 @@
 # .gitlab-ci.yml
 #
 
-image: golang
-
 stages:
   - test
   - build
   - package
 
+workflow:
+  rules: [ if: $CI_COMMIT_BRANCH ]
+
 test:
   stage: test
+  image: golang
   script:
     - go test -v -coverpkg ./... ./...
 
 build:
   stage: build
+  image: golang
   script:
     - GOARCH=amd64 GOOS=linux   go build -ldflags="-s -w" -o "propencrypt"     "cmd/propencrypt.go"
     - GOARCH=amd64 GOOS=windows go build -ldflags="-s -w" -o "propencrypt.exe" "cmd/propencrypt.go"
@@ -25,6 +28,7 @@ build:
 
 package-linux:
   stage: package
+  image: buildpack-deps
   script:
     - archive=propencrypt_linux_amd64.tar.gz
     - tar zcvf "${archive}" propencrypt

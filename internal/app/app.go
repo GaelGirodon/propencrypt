@@ -14,17 +14,17 @@ import (
 
 // Run executes the application.
 func Run() int {
+	// Define root flags
+	flagSet := flag.NewFlagSet("root", flag.ContinueOnError)
+	helpFlag := flagSet.BoolP("help", "h", false, "Print the help message")
+	versionFlag := flagSet.BoolP("version", "v", false, "Print the version number")
+
 	// Define commands
 	commands := make(map[string]cmd.ICommand)
 	commands["encrypt"] = encrypt.NewEncryptCmd()
 	commands["decrypt"] = decrypt.NewDecryptCmd()
-	commands["help"] = help.NewHelpCmd([]cmd.ICommand{commands["encrypt"], commands["decrypt"]})
+	commands["help"] = help.NewHelpCmd([]cmd.ICommand{commands["encrypt"], commands["decrypt"]}, flagSet)
 	commands["version"] = version.NewVersionCmd()
-
-	// Define root flags
-	flagSet := flag.NewFlagSet("root", flag.ContinueOnError)
-	helpFlag := flagSet.BoolP("help", "h", false, "Show the help message")
-	versionFlag := flagSet.BoolP("version", "v", false, "Show the version number")
 
 	// Show the global help message if there is no argument
 	if len(os.Args) < 2 {

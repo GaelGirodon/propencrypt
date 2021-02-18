@@ -4,6 +4,7 @@ import (
 	"errors"
 	"gaelgirodon.fr/propencrypt/internal/cmd"
 	"gaelgirodon.fr/propencrypt/internal/core/log"
+	flag "github.com/spf13/pflag"
 	"strconv"
 	"strings"
 )
@@ -11,21 +12,23 @@ import (
 // Command is the help command structure.
 type Command struct {
 	*cmd.Command
-	commands []cmd.ICommand
+	commands    []cmd.ICommand
+	rootFlagSet *flag.FlagSet
 }
 
 // NewHelpCmd initializes a help command.
-func NewHelpCmd(commands []cmd.ICommand) cmd.ICommand {
+func NewHelpCmd(commands []cmd.ICommand, rootFlagSet *flag.FlagSet) cmd.ICommand {
 	return &Command{
-		Command:  cmd.NewCommand("help", "", "", []string{}),
-		commands: commands,
+		Command:     cmd.NewCommand("help", "", "", []string{}),
+		commands:    commands,
+		rootFlagSet: rootFlagSet,
 	}
 }
 
 // Run shows the help message.
 func (c *Command) Run(args ...string) (err error) {
 	if len(args) == 0 {
-		showGlobalHelpMessage(c.commands)
+		showGlobalHelpMessage(c.commands, c.rootFlagSet)
 	} else if len(args) == 1 {
 		err = showCommandHelpMessage(c.commands, args[0])
 	} else {
@@ -35,8 +38,8 @@ func (c *Command) Run(args ...string) (err error) {
 }
 
 // showGlobalHelpMessage writes the global help message to the log output.
-func showGlobalHelpMessage(commands []cmd.ICommand) {
-	log.Println("propencrypt encrypts and decrypts properties in a file")
+func showGlobalHelpMessage(commands []cmd.ICommand, rootFlagSet *flag.FlagSet) {
+	log.Println("propencrypt encrypts and decrypts properties in files.")
 	log.Println("\nUsage:\n  propencrypt <command> [options]")
 	log.Println("\nCommands:")
 	nameMaxWidth := 0
@@ -49,6 +52,8 @@ func showGlobalHelpMessage(commands []cmd.ICommand) {
 		log.Printf("  %-"+strconv.Itoa(nameMaxWidth)+"s  %s\n",
 			command.Name(), command.Description())
 	}
+	log.Println("\nOptions:")
+	log.Print(rootFlagSet.FlagUsages())
 	log.Println("\nUse \"propencrypt help <command>\" for more information about a given command.")
 }
 

@@ -27,15 +27,15 @@ func NewEncryptCmd() cmd.ICommand {
 		[]string{
 			"# Encrypt properties in a single file (-> config.yml.enc)\n" +
 				"encrypt -k [...] -p \"password: (.+)\" config.yml",
-			"# Encrypt properties in multiple files (edit files in place)\n" +
+			"# Encrypt properties in multiple files (edit them in place)\n" +
 				"encrypt -k [...] -p \"secret=(.+)\" -e \"\" *.properties",
 		})
 	return &Command{
 		Command: c,
 		flags: Flags{
 			key:     c.FlagSet().StringP("key", "k", "", "256-bit encryption key"),
-			pattern: c.FlagSet().StringP("pattern", "p", "", "sensitive property pattern"),
-			ext:     c.FlagSet().StringP("ext", "e", ".enc", "extension to append to filenames"),
+			pattern: c.FlagSet().StringP("pattern", "p", "", "Sensitive property pattern"),
+			ext:     c.FlagSet().StringP("ext", "e", ".enc", "Extension to append to filenames"),
 		},
 	}
 }

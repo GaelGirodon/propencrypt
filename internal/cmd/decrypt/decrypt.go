@@ -27,14 +27,14 @@ func NewDecryptCmd() cmd.ICommand {
 		[]string{
 			"# Decrypt properties in a single file (-> config.yml)\n" +
 				"decrypt -k [...] config.yml.enc",
-			"# Decrypt properties in multiple files (edit files in place)\n" +
+			"# Decrypt properties in multiple files (edit them in place)\n" +
 				"decrypt -k [...] -e \"\" *.properties",
 		})
 	return &Command{
 		Command: c,
 		flags: Flags{
 			key: c.FlagSet().StringP("key", "k", "", "256-bit encryption key"),
-			ext: c.FlagSet().StringP("ext", "e", ".enc", "extension to remove from filenames"),
+			ext: c.FlagSet().StringP("ext", "e", ".enc", "Extension to remove from filenames"),
 		},
 	}
 }
