@@ -23,5 +23,5 @@ func TestHelp(t *testing.T) {
 		{name: "misc/unknown-cmd-flag", args: []string{"encrypt", "-?"}, wantPattern: "invalid command", wantCode: 1},
 	}
 	// Run command test cases
-	testCommand(t, tests)
+	testCommand(t, tests, []string{})
 }

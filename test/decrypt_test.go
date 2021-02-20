@@ -1,6 +1,7 @@
 package test
 
 import (
+	"gaelgirodon.fr/propencrypt/internal/core/env"
 	"testing"
 )
 
@@ -10,7 +11,13 @@ func TestDecrypt(t *testing.T) {
 			wantPattern: "key is required", wantCode: 1},
 		{name: "decrypt/opt-key-invalid", args: []string{"decrypt", "-k", "invalid"},
 			wantPattern: "key is required", wantCode: 1},
+		{name: "decrypt/opt-key-invalid-despite-env", args: []string{"decrypt", "-k", "invalid"},
+			env:         map[string]string{env.Key: key},
+			wantPattern: "key is required", wantCode: 1},
 		{name: "decrypt/opt-ext-invalid", args: []string{"decrypt", "-k", key, "-e", "invalid"},
+			wantPattern: "extension is invalid", wantCode: 1},
+		{name: "decrypt/opt-ext-invalid-despite-env", args: []string{"decrypt", "-k", key, "-e", "invalid"},
+			env:         map[string]string{env.Key: key, env.Ext: ".ok"},
 			wantPattern: "extension is invalid", wantCode: 1},
 		{name: "decrypt/args-files-missing", args: []string{"decrypt", "-k", key},
 			wantPattern: "missing files", wantCode: 1},
@@ -29,9 +36,11 @@ func TestDecrypt(t *testing.T) {
 		{name: "decrypt/ok", args: []string{"decrypt", "-k", key, "data/ok-dec.yml.enc"},
 			wantPattern: "", wantCode: 0, wantFile: "data/ok-dec.yml",
 			wantFilePattern: "^users:\\n- name: \\w+\\n  pass: bd852f\\n- name: \\w+\\n  pass: 2b13a9\\n$"},
+		{name: "decrypt/ok-env", args: []string{"decrypt", "data/ok-dec.yml.enc"},
+			env:         map[string]string{env.Key: key},
+			wantPattern: "", wantCode: 0, wantFile: "data/ok-dec.yml",
+			wantFilePattern: "^users:\\n- name: \\w+\\n  pass: bd852f\\n- name: \\w+\\n  pass: 2b13a9\\n$"},
 	}
 	// Run command test cases
-	testCommand(t, tests)
-	// Remove output files
-	removeDataFiles("ok-dec.yml")
+	testCommand(t, tests, []string{"ok-dec.yml"})
 }

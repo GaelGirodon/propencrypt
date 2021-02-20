@@ -2,6 +2,7 @@ package decrypt
 
 import (
 	"gaelgirodon.fr/propencrypt/internal/cmd"
+	"gaelgirodon.fr/propencrypt/internal/core/env"
 	"gaelgirodon.fr/propencrypt/internal/core/propencrypt"
 	"gaelgirodon.fr/propencrypt/internal/core/validate"
 	"regexp"
@@ -41,6 +42,9 @@ func NewDecryptCmd() cmd.ICommand {
 
 // Run decrypts properties in files.
 func (c *Command) Run(args ...string) error {
+	// Set options values to environment variables values by default
+	c.flags.key = c.GetFlagOrEnv("key", c.flags.key, env.Key)
+	c.flags.ext = c.GetFlagOrEnv("ext", c.flags.ext, env.Ext)
 	// Validate options
 	key, err := validate.Key(c.flags.key)
 	if err != nil {

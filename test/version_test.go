@@ -11,5 +11,5 @@ func TestVersion(t *testing.T) {
 		{name: "version/opt-short", args: []string{"-v"}, wantPattern: "propencrypt version [0-9.]+", wantCode: 0},
 	}
 	// Run command test cases
-	testCommand(t, tests)
+	testCommand(t, tests, []string{})
 }

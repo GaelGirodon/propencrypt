@@ -15,6 +15,7 @@ import (
 type commandTestCase struct {
 	name            string
 	args            []string
+	env             map[string]string
 	wantPattern     string
 	wantCode        int
 	wantFile        string
@@ -22,12 +23,16 @@ type commandTestCase struct {
 }
 
 // testCommand runs command test cases.
-func testCommand(t *testing.T, tests []commandTestCase) {
+func testCommand(t *testing.T, tests []commandTestCase, dataFiles []string) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			// Mock output
 			output := new(bytes.Buffer)
 			log.Output = output
+			// Set environment variables
+			for key, value := range test.env {
+				_ = os.Setenv(key, value)
+			}
 			// Set command-line arguments
 			os.Args = []string{"propencrypt"}
 			os.Args = append(os.Args, test.args...)
@@ -50,15 +55,16 @@ func testCommand(t *testing.T, tests []commandTestCase) {
 					t.Errorf("Expected '%s' to be valid", test.wantFile)
 				}
 			}
+			// Remove output test data files
+			for _, f := range dataFiles {
+				if fileutil.ExistsRegular("data/" + f) {
+					_ = os.Remove("data/" + f)
+				}
+			}
+			// Clean up environment variables
+			for key := range test.env {
+				_ = os.Unsetenv(key)
+			}
 		})
-	}
-}
-
-// removeDataFiles removes output test data files if they exist.
-func removeDataFiles(files ...string) {
-	for _, f := range files {
-		if fileutil.ExistsRegular("data/" + f) {
-			_ = os.Remove("data/" + f)
-		}
 	}
 }

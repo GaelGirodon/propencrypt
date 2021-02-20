@@ -1,6 +1,9 @@
 package cmd
 
-import flag "github.com/spf13/pflag"
+import (
+	flag "github.com/spf13/pflag"
+	"os"
+)
 
 // ICommand is an application sub-command.
 type ICommand interface {
@@ -75,4 +78,14 @@ func (c *Command) FlagSet() *flag.FlagSet {
 // for this command (help flag provided).
 func (c *Command) HelpRequested() bool {
 	return c.helpFlag != nil && *c.helpFlag
+}
+
+// GetFlagOrEnv returns the flag value if it has been set during parsing (or if
+// the environment variable is not present) or the environment variable value.
+func (c *Command) GetFlagOrEnv(flagName string, flagValue *string, envKey string) *string {
+	envValue, exists := os.LookupEnv(envKey)
+	if exists && !c.FlagSet().Changed(flagName) {
+		return &envValue
+	}
+	return flagValue
 }
