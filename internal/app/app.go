@@ -6,7 +6,7 @@ import (
 	"gaelgirodon.fr/propencrypt/internal/cmd/encrypt"
 	"gaelgirodon.fr/propencrypt/internal/cmd/help"
 	"gaelgirodon.fr/propencrypt/internal/cmd/version"
-	"gaelgirodon.fr/propencrypt/internal/core/log"
+	"gaelgirodon.fr/propencrypt/internal/log"
 	flag "github.com/spf13/pflag"
 	"os"
 	"strings"

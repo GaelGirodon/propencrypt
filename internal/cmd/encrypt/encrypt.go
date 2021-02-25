@@ -2,9 +2,9 @@ package encrypt
 
 import (
 	"gaelgirodon.fr/propencrypt/internal/cmd"
-	"gaelgirodon.fr/propencrypt/internal/core/env"
-	"gaelgirodon.fr/propencrypt/internal/core/propencrypt"
-	"gaelgirodon.fr/propencrypt/internal/core/validate"
+	"gaelgirodon.fr/propencrypt/internal/core"
+	"gaelgirodon.fr/propencrypt/internal/env"
+	"gaelgirodon.fr/propencrypt/internal/validate"
 )
 
 // Command is the encrypt command structure.
@@ -66,5 +66,5 @@ func (c *Command) Run(args ...string) (err error) {
 		return err
 	}
 	// Encrypt
-	return propencrypt.Encrypt(files, pattern, key, ext)
+	return core.Encrypt(files, pattern, key, ext)
 }

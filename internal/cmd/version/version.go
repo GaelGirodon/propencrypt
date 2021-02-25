@@ -2,7 +2,7 @@ package version
 
 import (
 	"gaelgirodon.fr/propencrypt/internal/cmd"
-	"gaelgirodon.fr/propencrypt/internal/core/log"
+	"gaelgirodon.fr/propencrypt/internal/log"
 )
 
 // Version is the application version number.
@@ -21,7 +21,7 @@ func NewVersionCmd() cmd.ICommand {
 }
 
 // Run shows the application version number.
-func (c *Command) Run(args ...string) error {
+func (c *Command) Run(...string) error {
 	log.Println("propencrypt version " + Version)
 	return nil
 }

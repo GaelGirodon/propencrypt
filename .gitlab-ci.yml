@@ -26,7 +26,7 @@ build:
     paths: [ "propencrypt", "propencrypt.exe" ]
     expire_in: 1 week
 
-package-linux:
+package:linux:
   stage: package
   image: buildpack-deps
   script:
@@ -37,7 +37,7 @@ package-linux:
     paths: [ "propencrypt_linux_amd64.tar.gz*" ]
     expire_in: 1 week
 
-package-windows:
+package:windows:
   stage: package
   image: mcr.microsoft.com/powershell
   script:

@@ -1,7 +1,7 @@
 package test
 
 import (
-	"gaelgirodon.fr/propencrypt/internal/core/env"
+	"gaelgirodon.fr/propencrypt/internal/env"
 	"testing"
 )
 

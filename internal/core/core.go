@@ -1,9 +1,9 @@
-package propencrypt
+package core
 
 import (
 	"encoding/base64"
 	"fmt"
-	"gaelgirodon.fr/propencrypt/internal/core/log"
+	"gaelgirodon.fr/propencrypt/internal/log"
 	"gaelgirodon.fr/propencrypt/pkg/crypto"
 	"io/ioutil"
 	"os"

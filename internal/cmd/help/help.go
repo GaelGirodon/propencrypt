@@ -3,7 +3,7 @@ package help
 import (
 	"errors"
 	"gaelgirodon.fr/propencrypt/internal/cmd"
-	"gaelgirodon.fr/propencrypt/internal/core/log"
+	"gaelgirodon.fr/propencrypt/internal/log"
 	flag "github.com/spf13/pflag"
 	"strconv"
 	"strings"

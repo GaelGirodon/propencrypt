@@ -3,7 +3,7 @@ package test
 import (
 	"bytes"
 	"gaelgirodon.fr/propencrypt/internal/app"
-	"gaelgirodon.fr/propencrypt/internal/core/log"
+	"gaelgirodon.fr/propencrypt/internal/log"
 	"gaelgirodon.fr/propencrypt/pkg/fileutil"
 	"io/ioutil"
 	"os"
