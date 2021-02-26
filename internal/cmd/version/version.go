@@ -6,7 +6,7 @@ import (
 )
 
 // Version is the application version number.
-const Version = "0.1.0"
+const Version = "0.2.0"
 
 // Command is the version command structure.
 type Command struct {
