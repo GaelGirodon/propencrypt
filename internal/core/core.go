@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"gaelgirodon.fr/propencrypt/internal/log"
 	"gaelgirodon.fr/propencrypt/pkg/crypto"
-	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
@@ -30,7 +29,7 @@ func process(encrypt bool, filenames []string, pattern *regexp.Regexp, key *[32]
 			return fmt.Errorf("unable to get information about the file '%s'", f)
 		}
 		// Read the file content
-		content, err := ioutil.ReadFile(f)
+		content, err := os.ReadFile(f)
 		if err != nil {
 			return fmt.Errorf("unable to read file '%s'", f)
 		}
@@ -79,7 +78,7 @@ func process(encrypt bool, filenames []string, pattern *regexp.Regexp, key *[32]
 		} else {
 			outputFilename = strings.TrimSuffix(f, ext)
 		}
-		if err = ioutil.WriteFile(outputFilename, output, fileInfo.Mode().Perm()); err != nil {
+		if err = os.WriteFile(outputFilename, output, fileInfo.Mode().Perm()); err != nil {
 			return fmt.Errorf("unable to write output file '%s'", outputFilename)
 		}
 	}

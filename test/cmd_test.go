@@ -5,7 +5,6 @@ import (
 	"gaelgirodon.fr/propencrypt/internal/app"
 	"gaelgirodon.fr/propencrypt/internal/log"
 	"gaelgirodon.fr/propencrypt/pkg/fileutil"
-	"io/ioutil"
 	"os"
 	"regexp"
 	"testing"
@@ -50,7 +49,7 @@ func testCommand(t *testing.T, tests []commandTestCase, dataFiles []string) {
 				if !fileutil.ExistsRegular(test.wantFile) {
 					t.Errorf("Expected '%s' to exist", test.wantFile)
 				}
-				content, _ := ioutil.ReadFile(test.wantFile)
+				content, _ := os.ReadFile(test.wantFile)
 				if !regexp.MustCompile(test.wantFilePattern).Match(content) {
 					t.Errorf("Expected '%s' to be valid", test.wantFile)
 				}
