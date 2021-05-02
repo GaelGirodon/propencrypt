@@ -4,6 +4,7 @@
 [![license](https://img.shields.io/github/license/GaelGirodon/propencrypt?color=blue&style=flat-square)](./LICENSE)
 [![build](https://img.shields.io/gitlab/pipeline/GaelGirodon/propencrypt/master?style=flat-square)](https://gitlab.com/GaelGirodon/propencrypt/-/pipelines/latest)
 [![coverage](https://img.shields.io/gitlab/coverage/GaelGirodon/propencrypt/master?style=flat-square)](https://gitlab.com/GaelGirodon/propencrypt/-/pipelines/latest)
+[![docker](https://img.shields.io/docker/v/gaelgirodon/propencrypt?color=blue&label=docker&logo=docker&logoColor=white&style=flat-square)](https://hub.docker.com/r/gaelgirodon/propencrypt)
 
 Encrypt and decrypt multiple properties, in multiple files, at once.
 
