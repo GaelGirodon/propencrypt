@@ -12,13 +12,13 @@ workflow:
 
 test:
   stage: test
-  image: golang:1.16
+  image: golang:1.17
   script:
     - go test -v -coverpkg ./... ./...
 
 build:
   stage: build
-  image: golang:1.16
+  image: golang:1.17
   script:
     - GOARCH=amd64 GOOS=linux   go build -ldflags="-s -w" -o "propencrypt"     "cmd/propencrypt.go"
     - GOARCH=amd64 GOOS=windows go build -ldflags="-s -w" -o "propencrypt.exe" "cmd/propencrypt.go"
