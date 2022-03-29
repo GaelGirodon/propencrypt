@@ -9,10 +9,10 @@ import (
 
 var (
 	// patternFlagRegex is the regex used to validate the pattern value.
-	patternFlagRegex = regexp.MustCompile("\\(.+\\)")
+	patternFlagRegex = regexp.MustCompile(`\(.+\)`)
 
 	// extFlagRegex is the regex used to validate the extension value.
-	extFlagRegex = regexp.MustCompile("^\\.[\\w-.]+$")
+	extFlagRegex = regexp.MustCompile(`^\.[\w-.]+$`)
 )
 
 // Key validates a key value and returns the key in the right format.

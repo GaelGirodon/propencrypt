@@ -60,6 +60,6 @@ func (c *Command) Run(args ...string) error {
 		return err
 	}
 	// Decrypt
-	pattern := regexp.MustCompile("(ENC\\(([\\w+/=]+)\\))")
+	pattern := regexp.MustCompile(`(ENC\(([\w+/=]+)\))`)
 	return core.Decrypt(files, pattern, key, ext)
 }

@@ -6,7 +6,7 @@
 # docker push gaelgirodon/propencrypt:$VERSION
 # docker push gaelgirodon/propencrypt:latest
 
-FROM golang AS build
+FROM golang:1.18 AS build
 COPY . /app
 WORKDIR /app
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
