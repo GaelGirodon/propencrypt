@@ -2,8 +2,9 @@
 
 [![release](https://img.shields.io/github/v/release/GaelGirodon/propencrypt?style=flat-square)](https://github.com/GaelGirodon/propencrypt/releases/latest)
 [![license](https://img.shields.io/github/license/GaelGirodon/propencrypt?color=blue&style=flat-square)](./LICENSE)
-[![build](https://img.shields.io/gitlab/pipeline/GaelGirodon/propencrypt/master?style=flat-square)](https://gitlab.com/GaelGirodon/propencrypt/-/pipelines/latest)
-[![coverage](https://img.shields.io/gitlab/coverage/GaelGirodon/propencrypt/master?style=flat-square)](https://gitlab.com/GaelGirodon/propencrypt/-/pipelines/latest)
+[![build](https://img.shields.io/github/workflow/status/GaelGirodon/propencrypt/build?style=flat-square)](https://github.com/GaelGirodon/propencrypt/actions/workflows/build.yml)
+[![tests](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fgist.githubusercontent.com%2FGaelGirodon%2Ffbde4d59b7dd3c4f2cc9c4fea3497ae1%2Fraw%2Fpropencrypt-go-tests.json)](https://github.com/GaelGirodon/propencrypt/actions/workflows/build.yml)
+[![coverage](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fgist.githubusercontent.com%2FGaelGirodon%2Ffbde4d59b7dd3c4f2cc9c4fea3497ae1%2Fraw%2Fpropencrypt-go-coverage.json)](https://github.com/GaelGirodon/propencrypt/actions/workflows/build.yml)
 [![docker](https://img.shields.io/docker/v/gaelgirodon/propencrypt?color=blue&label=docker&logo=docker&logoColor=white&style=flat-square)](https://hub.docker.com/r/gaelgirodon/propencrypt)
 
 Encrypt and decrypt multiple properties, in multiple files, at once.

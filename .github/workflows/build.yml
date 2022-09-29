@@ -1,0 +1,52 @@
+name: build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+          cache: true
+
+      - name: Test
+        run: go test -v -coverpkg ./... ./... | tee test.out
+
+      - name: Publish test and coverage metrics
+        uses: gaelgirodon/ci-badges-action@v1
+        with:
+          gist-id: fbde4d59b7dd3c4f2cc9c4fea3497ae1
+          token: ${{ secrets.GIST_TOKEN }}
+
+      - name: Build (Linux)
+        run: go build -ldflags="-s -w" -o "propencrypt" "cmd/propencrypt.go"
+        env: { GOARCH: amd64, GOOS: linux }
+
+      - name: Build (Windows)
+        run: go build -ldflags="-s -w" -o "propencrypt.exe" "cmd/propencrypt.go"
+        env: { GOARCH: amd64, GOOS: windows }
+
+      - name: Package (Linux)
+        run: |
+          archive=propencrypt_linux_amd64.tar.gz
+          tar zcvf "${archive}" propencrypt
+          sha256sum "${archive}" | cut -d' ' -f 1 > "${archive}.sha256"
+
+      - name: Package (Windows)
+        shell: pwsh
+        run: |
+          $archive = 'propencrypt_windows_amd64.zip'
+          Compress-Archive 'propencrypt.exe' -DestinationPath "$archive" -CompressionLevel 'Optimal'
+          $hash = (Get-FileHash -Algorithm 'SHA256' "$archive").Hash.ToLower()
+          Set-Content -Path "$archive.sha256" -Value "$hash`n" -Encoding 'ascii' -NoNewline
+
+      - name: Publish artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: propencrypt
+          path: propencrypt_*_*.*
