@@ -1,0 +1,26 @@
+{
+  "name": "propencrypt",
+  "version": "0.0.0",
+  "description": "Encrypt and decrypt multiple properties, in multiple files, at once",
+  "homepage": "https://github.com/GaelGirodon/propencrypt#readme",
+  "bugs": "https://github.com/GaelGirodon/propencrypt/issues",
+  "license": "GPL-3.0-or-later",
+  "author": "Gael Girodon <contact@gaelgirodon.fr>",
+  "files": [
+    "propencrypt.js",
+    "*/propencrypt*"
+  ],
+  "main": "propencrypt.js",
+  "bin": "propencrypt.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GaelGirodon/propencrypt.git"
+  },
+  "os": [
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ]
+}

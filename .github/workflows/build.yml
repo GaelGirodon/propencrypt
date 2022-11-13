@@ -45,8 +45,34 @@ jobs:
           $hash = (Get-FileHash -Algorithm 'SHA256' "$archive").Hash.ToLower()
           Set-Content -Path "$archive.sha256" -Value "$hash`n" -Encoding 'ascii' -NoNewline
 
-      - name: Publish artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: propencrypt
-          path: propencrypt_*_*.*
+          path: propencrypt*
+
+  npm-package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with: { node-version: 18 }
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with: { name: propencrypt }
+
+      - name: Package
+        run: bash ./build/package/npm/scripts/package.sh
+
+      - name: Test
+        run: bash ./build/package/npm/scripts/test.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: propencrypt-npm-package
+          path: build/package/npm/*.tgz

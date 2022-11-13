@@ -1,0 +1,7 @@
+# .gitignore
+
+*/propencrypt*
+test
+LICENSE
+README.md
+*.tgz
